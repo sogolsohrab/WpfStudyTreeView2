@@ -44,13 +44,15 @@ namespace WpfStudyTreeView2
             // Wells
             Wells = new TreeModel("Wells", Types.Wells);
             MyViewModel.Items.Add(Wells);
-            Wells.Items.Add(new TreeModel("R1_W012", Types.WellsChild));
-            Wells.Items.Add(new TreeModel("R2_W1", Types.WellsChild));
-            Wells.Items.Add(new TreeModel("R1_W1", Types.WellsChild));
             Wells.Items.Add(new TreeModel("R1_W7", Types.WellsChild));
+            Wells.Items.Add(new TreeModel("R1_W12345678912", Types.WellsChild));
+            Wells.Items.Add(new TreeModel("R1_W123456789111", Types.WellsChild));
+            Wells.Items.Add(new TreeModel("R2_W1", Types.WellsChild));
             Wells.Items.Add(new TreeModel("R2_W11", Types.WellsChild));
             Wells.Items.Add(new TreeModel("R2_W03", Types.WellsChild));
             Wells.Items.Add(new TreeModel("R2_W123456789123456789", Types.WellsChild));
+            Wells.Items.Add(new TreeModel("R1_W1", Types.WellsChild));
+            Wells.Items.Add(new TreeModel("R1_W012", Types.WellsChild));
 
             // Rocks
             Rocks = new TreeModel("Rocks", Types.Rocks);
@@ -99,16 +101,15 @@ namespace WpfStudyTreeView2
 
         private HierarchicalDataTemplate GetDataTemplate()
         {
-            //create the data template
+            
             HierarchicalDataTemplate dataTemplate = new HierarchicalDataTemplate();
             dataTemplate.ItemsSource = new Binding() { Path = new PropertyPath("Items") };
 
-            //create stack pane;
             FrameworkElementFactory stackPanel = new FrameworkElementFactory(typeof(StackPanel));
             stackPanel.Name = "parentStackpanel";
             stackPanel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
 
-            // create Image 
+            
             FrameworkElementFactory image = new FrameworkElementFactory(typeof(Image));
             image.SetValue(Image.MarginProperty, new Thickness(2));
             image.SetValue(Image.WidthProperty, 16.0);
@@ -116,14 +117,12 @@ namespace WpfStudyTreeView2
             image.SetBinding(Image.SourceProperty, new Binding() { Path = new PropertyPath("DisplayedImagePath") });
             stackPanel.AppendChild(image);
 
-            // create textBlock
             FrameworkElementFactory textBlock = new FrameworkElementFactory(typeof(TextBlock));
             textBlock.SetValue(TextBlock.MarginProperty, new Thickness(5));
             textBlock.SetValue(TextBlock.FontSizeProperty, 12.0);
             textBlock.SetBinding(TextBlock.TextProperty, new Binding() { Path = new PropertyPath("Title") });
             stackPanel.AppendChild(textBlock);
 
-            //set the visual tree of the data template
             dataTemplate.VisualTree = stackPanel;
 
             return dataTemplate;
@@ -132,9 +131,7 @@ namespace WpfStudyTreeView2
         private Style GetStyle()
         {
             var style = new Style {TargetType = typeof(TreeViewItem)};
-
             var eventSetter = new EventSetter(PreviewMouseRightButtonDownEvent, new MouseButtonEventHandler(OnPreviewMouseRightButtonDown));
-
             style.Setters.Add(eventSetter);
            
             return style;
