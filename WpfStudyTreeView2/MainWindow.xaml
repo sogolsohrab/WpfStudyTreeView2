@@ -176,7 +176,7 @@
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Content="ABORT" Name="btnAbortDelete" Click="btnAbortDelete_Click"
                                             Width="80" Height="25" Margin="5,5,2,10" Background="White" BorderBrush="#0066BF" BorderThickness="1" Foreground="#0066BF"/>
-                                            <Button Content="PROCEED" Name="btnProceesDelete" Click="btnProceesDelete_Click" 
+                                            <Button Content="PROCEED" Name="btnProceedDelete" Click="btnProceedDelete_Click" 
                                             Width="80" Height="25" Margin="2,5,10,10" Background="#0066BF" BorderBrush="#0066BF" BorderThickness="1" Foreground="White"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -219,7 +219,7 @@
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Content="ABORT" Name="btnAbortRename" Click="btnAbortRename_Click"
                                             Width="80" Height="25" Margin="5,5,2,10" Background="White" BorderBrush="#0066BF" BorderThickness="1" Foreground="#0066BF"/>
-                                            <Button Content="PROCEED" Name="btnProceesRename" Click="btnProceesRename_Click"
+                                            <Button Content="PROCEED" Name="btnProceedRename" Click="btnProceedRename_Click"
                                             Width="80" Height="25" Margin="2,5,10,10" Background="#0066BF" BorderBrush="#0066BF" BorderThickness="1" Foreground="White"/>
                                         </StackPanel>
                                     </StackPanel>

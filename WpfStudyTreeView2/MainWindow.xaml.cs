@@ -216,7 +216,7 @@ namespace WpfStudyTreeView2
             ControlPanelsVisibilty(HomePanel);
         }
 
-        private void btnProceesDelete_Click(object sender, RoutedEventArgs e)
+        private void btnProceedDelete_Click(object sender, RoutedEventArgs e)
         {
 
             if (MyViewModel.SelectedItem.ParantType)
@@ -260,7 +260,7 @@ namespace WpfStudyTreeView2
             ControlPanelsVisibilty(HomePanel);
         }
 
-        private void btnProceesRename_Click(object sender, RoutedEventArgs e)
+        private void btnProceedRename_Click(object sender, RoutedEventArgs e)
         {
 
             if (
