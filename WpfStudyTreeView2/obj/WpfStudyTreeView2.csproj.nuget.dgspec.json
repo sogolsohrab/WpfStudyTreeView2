@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User1\\Source\\Repos\\sogolsohrab\\WpfStudyTreeView2\\WpfStudyTreeView2\\WpfStudyTreeView2.csproj": {}
+    "C:\\Users\\User1\\source\\repos\\sogolsohrab\\WpfStudyTreeView2\\WpfStudyTreeView2\\WpfStudyTreeView2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User1\\Source\\Repos\\sogolsohrab\\WpfStudyTreeView2\\WpfStudyTreeView2\\WpfStudyTreeView2.csproj": {
+    "C:\\Users\\User1\\source\\repos\\sogolsohrab\\WpfStudyTreeView2\\WpfStudyTreeView2\\WpfStudyTreeView2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User1\\Source\\Repos\\sogolsohrab\\WpfStudyTreeView2\\WpfStudyTreeView2\\WpfStudyTreeView2.csproj",
+        "projectUniqueName": "C:\\Users\\User1\\source\\repos\\sogolsohrab\\WpfStudyTreeView2\\WpfStudyTreeView2\\WpfStudyTreeView2.csproj",
         "projectName": "WpfStudyTreeView2",
-        "projectPath": "C:\\Users\\User1\\Source\\Repos\\sogolsohrab\\WpfStudyTreeView2\\WpfStudyTreeView2\\WpfStudyTreeView2.csproj",
+        "projectPath": "C:\\Users\\User1\\source\\repos\\sogolsohrab\\WpfStudyTreeView2\\WpfStudyTreeView2\\WpfStudyTreeView2.csproj",
         "packagesPath": "C:\\Users\\User1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User1\\Source\\Repos\\sogolsohrab\\WpfStudyTreeView2\\WpfStudyTreeView2\\obj\\",
+        "outputPath": "C:\\Users\\User1\\source\\repos\\sogolsohrab\\WpfStudyTreeView2\\WpfStudyTreeView2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

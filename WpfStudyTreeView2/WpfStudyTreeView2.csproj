@@ -13,7 +13,7 @@
     <None Remove="Resources\MeeraIcon.jpg" />
     <None Remove="Resources\new.jpg" />
     <None Remove="Resources\Polygones.jpg" />
-    <None Remove="Resources\RenameIcon.png" />
+    <None Remove="Resources\RenameIcon.jpg" />
     <None Remove="Resources\Rocks.jpg" />
     <None Remove="Resources\RocksM.jpg" />
     <None Remove="Resources\WarningIcon.jpg" />
@@ -29,7 +29,7 @@
     <Resource Include="Resources\MeeraIcon.jpg" />
     <Resource Include="Resources\new.jpg" />
     <Resource Include="Resources\Polygones.jpg" />
-    <Resource Include="Resources\RenameIcon.png" />
+    <Resource Include="Resources\RenameIcon.jpg" />
     <Resource Include="Resources\Rocks.jpg" />
     <Resource Include="Resources\RocksM.jpg" />
     <Resource Include="Resources\WarningIcon.jpg" />

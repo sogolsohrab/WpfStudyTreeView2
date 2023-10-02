@@ -142,25 +142,30 @@ namespace WpfStudyTreeView2
         {
 
             ContextMenu contextMenu = new ContextMenu();
+            MenuItem RenameMenuItem = CreateMenuItem("Rename", @"/Resources/RenameIcon.jpg", renameMenuItem_Click);
+            MenuItem DeleteMenuItem = CreateMenuItem("Delete", @"/Resources/DeleteIcon.jpg", deleteMenuItem_Click);
 
             if (MyViewModel.SelectedItem.ParantType)
             {
-                contextMenu.Items.Add(CreateMenuItem("Rename", renameMenuItem_Click));
+                contextMenu.Items.Add(RenameMenuItem);
             }
             else 
             {
-                contextMenu.Items.Add(CreateMenuItem("Rename", renameMenuItem_Click));
-                contextMenu.Items.Add(CreateMenuItem("Delete", deleteMenuItem_Click));
+                contextMenu.Items.Add(RenameMenuItem);
+                contextMenu.Items.Add(DeleteMenuItem);
             }
             (sender as TreeViewItem).ContextMenu = contextMenu;
         }
 
-        private static MenuItem CreateMenuItem(String header, RoutedEventHandler routedEventHandler)
+        private static MenuItem CreateMenuItem(String header, String imagePath, RoutedEventHandler routedEventHandler)
         {
             MenuItem menuItem = new MenuItem();
             menuItem.Header = header;
             menuItem.Click += routedEventHandler;
-
+            menuItem.Icon = new System.Windows.Controls.Image
+            {
+                Source = new BitmapImage(new Uri(imagePath, UriKind.Relative))
+            };
             return menuItem;
         }
 
