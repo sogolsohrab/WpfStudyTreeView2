@@ -24,7 +24,7 @@ namespace WpfStudyTreeView2
     public partial class MainWindow : Window
     {
 
-        public TreeViewModel MyViewModel = new TreeViewModel();
+        public TreeViewModel MyViewModel { get; set; } 
         public TreeModel Wells { get; set; }
         public TreeModel Rocks { get; set; }
         public TreeModel Polygones { get; set; }
@@ -41,29 +41,19 @@ namespace WpfStudyTreeView2
         #region Private Methods
         private void LoadTree()
         {
+            MyViewModel = new TreeViewModel();
+
             // Wells
             Wells = new TreeModel("Wells", Types.Wells);
             MyViewModel.Items.Add(Wells);
-            Wells.Items.Add(new TreeModel("R1_W7", Types.WellsChild));
-            Wells.Items.Add(new TreeModel("R1_W12345678912", Types.WellsChild));
-            Wells.Items.Add(new TreeModel("R1_W123456789111", Types.WellsChild));
-            Wells.Items.Add(new TreeModel("R2_W1", Types.WellsChild));
-            Wells.Items.Add(new TreeModel("R2_W11", Types.WellsChild));
-            Wells.Items.Add(new TreeModel("R2_W03", Types.WellsChild));
-            Wells.Items.Add(new TreeModel("R2_W123456789123456789", Types.WellsChild));
-            Wells.Items.Add(new TreeModel("R1_W1", Types.WellsChild));
-            Wells.Items.Add(new TreeModel("R1_W012", Types.WellsChild));
+            string[] wellsMember = { "R1_W7", "R1_W12345678912", "R1_W123456789111", "R2_W1", "R2_W11", "R2_W03", "R2_W123456789123456789", "R1_W1", "R1_W012" };
+            CreateMembers(Wells, wellsMember, Types.WellsChild);
 
             // Rocks
             Rocks = new TreeModel("Rocks", Types.Rocks);
             MyViewModel.Items.Add(Rocks);
-            Rocks.Items.Add(new TreeModel("R4", Types.RocksChild));
-            Rocks.Items.Add(new TreeModel("R2", Types.RocksChild));
-            Rocks.Items.Add(new TreeModel("R1", Types.RocksChild));
-            Rocks.Items.Add(new TreeModel("R3", Types.RocksChild));
-            Rocks.Items.Add(new TreeModel("R5", Types.RocksChild));
-            Rocks.Items.Add(new TreeModel("R6", Types.RocksChild));
-            Rocks.Items.Add(new TreeModel("R7", Types.RocksChild));
+            string[] rocksMember = { "R4", "R2", "R1", "R3", "R7", "R6", "R5"};
+            CreateMembers(Rocks, rocksMember, Types.RocksChild);
 
             // Polygones
             Polygones = new TreeModel("Polygones", Types.Polygones);
@@ -72,15 +62,18 @@ namespace WpfStudyTreeView2
             // WellStrategies
             WellStrategies = new TreeModel("WellStrategies", Types.WellStrategies);
             MyViewModel.Items.Add(WellStrategies);
-            WellStrategies.Items.Add(new TreeModel("WS1", Types.WellStrategiesChild));
-            WellStrategies.Items.Add(new TreeModel("WS2", Types.WellStrategiesChild));
-            WellStrategies.Items.Add(new TreeModel("WS3", Types.WellStrategiesChild));
-            WellStrategies.Items.Add(new TreeModel("WS4", Types.WellStrategiesChild));
-            WellStrategies.Items.Add(new TreeModel("WS5", Types.WellStrategiesChild));
-            WellStrategies.Items.Add(new TreeModel("WS6", Types.WellStrategiesChild));
+            string[] wellStrategiesMember = { "WS6", "WS2", "WS4", "WS1", "WS3", "WS5" };
+            CreateMembers(WellStrategies, wellStrategiesMember, Types.WellStrategiesChild);
 
-            // Ordering
             SortTree();
+        }
+
+        private void CreateMembers(TreeModel parant, string[] membersNameArray, Types membersType)
+        {
+            foreach (string memberName in membersNameArray)
+            {
+                parant.Items.Add(new TreeModel(memberName, membersType));
+            }
         }
 
         private void SortTree()
