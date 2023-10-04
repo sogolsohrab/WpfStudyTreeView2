@@ -23,7 +23,6 @@ namespace WpfStudyTreeView2
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public TreeNodeViewModel MyViewModel { get; set; } 
         public TreeNodeModel Wells { get; set; }
         public TreeNodeModel Rocks { get; set; }
@@ -44,27 +43,28 @@ namespace WpfStudyTreeView2
             MyViewModel = new TreeNodeViewModel();
 
             // Wells
-            Wells = new TreeNodeModel("Wells", NodeTypes.Wells);
+            Wells = new TreeNodeModel("Wells", NodeTypes.Well);
             MyViewModel.Items.Add(Wells);
             string[] wellMembers = { "R1_W7", "R1_W12345678912", "R1_W123456789111", "R2_W1", "R2_W11", "R2_W03", "R2_W123456789123456789", "R1_W1", "R1_W012" };
-            CreateMembers(Wells, wellMembers, NodeTypes.WellsChild);
+            CreateMembers(Wells, wellMembers, NodeTypes.WellMembers);
 
             // Rocks
-            Rocks = new TreeNodeModel("Rocks", NodeTypes.Rocks);
+            Rocks = new TreeNodeModel("Rocks", NodeTypes.Rock);
             MyViewModel.Items.Add(Rocks);
             string[] rockMembers = { "R4", "R2", "R1", "R3", "R7", "R6", "R5"};
-            CreateMembers(Rocks, rockMembers, NodeTypes.RocksChild);
+            CreateMembers(Rocks, rockMembers, NodeTypes.RockMembers);
 
             // Polygones
-            Polygons = new TreeNodeModel("Polygons", NodeTypes.Polygons);
+            Polygons = new TreeNodeModel("Polygons", NodeTypes.Polygon);
             MyViewModel.Items.Add(Polygons);
 
             // WellStrategies
-            WellStrategies = new TreeNodeModel("WellStrategies", NodeTypes.WellStrategies);
+            WellStrategies = new TreeNodeModel("Well Strategies", NodeTypes.WellStrategy);
             MyViewModel.Items.Add(WellStrategies);
-            string[] wellStrategieMembers = { "WS6", "WS2", "WS4", "WS1", "WS3", "WS5" };
-            CreateMembers(WellStrategies, wellStrategieMembers, NodeTypes.WellStrategiesChild);
+            string[] wellStrategyMembers = { "WS6", "WS2", "WS4", "WS1", "WS3", "WS5" };
+            CreateMembers(WellStrategies, wellStrategyMembers, NodeTypes.WellStrategyMembers);
 
+            
             SortTree();
         }
 
@@ -90,6 +90,7 @@ namespace WpfStudyTreeView2
             MyTree.ItemContainerStyle = CreateStyle();
             MyTree.ItemsSource = MyViewModel.Items;
             MyTree.SelectedItemChanged += OnSelectedItemChanged;
+          
         }
 
         private HierarchicalDataTemplate GetDataTemplate()
@@ -139,8 +140,8 @@ namespace WpfStudyTreeView2
             }
 
             ContextMenu contextMenu = new ContextMenu();
-            MenuItem renameMenuItem = CreateMenuItem("Rename", @"/Resources/RenameIcon.jpg", RenameMenuItem_Click);
-            MenuItem deleteMenuItem = CreateMenuItem("Delete", @"/Resources/DeleteIcon.jpg", DeleteMenuItem_Click);
+            MenuItem renameMenuItem = CreateMenuItem("Rename", Constants.ImagePath.RenameIconImagePath, RenameMenuItem_Click);
+            MenuItem deleteMenuItem = CreateMenuItem("Delete", Constants.ImagePath.DeleteIconImagePath, DeleteMenuItem_Click);
 
             if (MyViewModel.SelectedItem.IsParentNode)
             {
@@ -165,10 +166,10 @@ namespace WpfStudyTreeView2
             };
             return menuItem;
         }
-
+        
         private void ControlPanelsVisibility(Border selectedBorder)
         {
-            
+
             List<Border> bordersList = new List<Border>() { HomePanel, RenamePanel, DeletePanel };
             foreach (var border in bordersList)
             {

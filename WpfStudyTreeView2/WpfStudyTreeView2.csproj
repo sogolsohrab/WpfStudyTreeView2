@@ -12,15 +12,15 @@
     <None Remove="Resources\DeleteIcon.jpg" />
     <None Remove="Resources\MeeraIcon.jpg" />
     <None Remove="Resources\new.jpg" />
-    <None Remove="Resources\Polygons.jpg" />
+    <None Remove="Resources\Polygon.jpg" />
     <None Remove="Resources\RenameIcon.jpg" />
-    <None Remove="Resources\Rocks.jpg" />
-    <None Remove="Resources\RocksM.jpg" />
+    <None Remove="Resources\Rock.jpg" />
+    <None Remove="Resources\RockM.jpg" />
     <None Remove="Resources\WarningIcon.jpg" />
-    <None Remove="Resources\Wells.jpg" />
-    <None Remove="Resources\WellsM.jpg" />
-    <None Remove="Resources\WellStrategies.jpg" />
-    <None Remove="Resources\WellStrategiesM.jpg" />
+    <None Remove="Resources\Well.jpg" />
+    <None Remove="Resources\WellM.jpg" />
+    <None Remove="Resources\WellStrategy.jpg" />
+    <None Remove="Resources\WellStrategyM.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,15 +28,15 @@
     <Resource Include="Resources\DeleteIcon.jpg" />
     <Resource Include="Resources\MeeraIcon.jpg" />
     <Resource Include="Resources\new.jpg" />
-    <Resource Include="Resources\Polygons.jpg" />
+    <Resource Include="Resources\Polygon.jpg" />
     <Resource Include="Resources\RenameIcon.jpg" />
-    <Resource Include="Resources\Rocks.jpg" />
-    <Resource Include="Resources\RocksM.jpg" />
+    <Resource Include="Resources\Rock.jpg" />
+    <Resource Include="Resources\RockM.jpg" />
     <Resource Include="Resources\WarningIcon.jpg" />
-    <Resource Include="Resources\Wells.jpg" />
-    <Resource Include="Resources\WellsM.jpg" />
-    <Resource Include="Resources\WellStrategies.jpg" />
-    <Resource Include="Resources\WellStrategiesM.jpg" />
+    <Resource Include="Resources\Well.jpg" />
+    <Resource Include="Resources\WellM.jpg" />
+    <Resource Include="Resources\WellStrategy.jpg" />
+    <Resource Include="Resources\WellStrategyM.jpg" />
   </ItemGroup>
 
 </Project>

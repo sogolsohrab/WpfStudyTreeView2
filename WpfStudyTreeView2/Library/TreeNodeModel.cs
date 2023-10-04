@@ -11,14 +11,14 @@ namespace WpfStudyTreeView2.Library
 {
     public enum NodeTypes
     {
-        Wells,
-        Rocks,
-        Polygons,
-        WellStrategies,
-        WellsChild,
-        RocksChild,
-        PolygonsChild,
-        WellStrategiesChild
+        Well,
+        Rock,
+        Polygon,
+        WellStrategy,
+        WellMembers,
+        RockMembers,
+        PolygonMembers,
+        WellStrategyMembers
     }
 
     public class TreeNodeModel : PropertyChangedBase
@@ -49,7 +49,7 @@ namespace WpfStudyTreeView2.Library
             DisplayedImagePath = GetImage(type);
             Items = new ObservableCollection<TreeNodeModel>();
 
-            if (type == NodeTypes.Wells || type == NodeTypes.Rocks || type == NodeTypes.Polygons || type == NodeTypes.WellStrategies)
+            if (type == NodeTypes.Well || type == NodeTypes.Rock || type == NodeTypes.Polygon || type == NodeTypes.WellStrategy)
             {
                 IsParentNode = true;
             }
@@ -65,29 +65,29 @@ namespace WpfStudyTreeView2.Library
 
             switch (type)
             {
-                case NodeTypes.Wells:
-                    imagePath = @"/Resources/Wells.jpg";
+                case NodeTypes.Well:
+                    imagePath = Constants.ImagePath.WellImagePath;
                     break;
-                case NodeTypes.Rocks:
-                    imagePath = @"/Resources/Rocks.jpg";
+                case NodeTypes.Rock:
+                    imagePath = Constants.ImagePath.RockImagePath;
                     break;
-                case NodeTypes.Polygons:
-                    imagePath = @"/Resources/Polygons.jpg";
+                case NodeTypes.Polygon:
+                    imagePath = Constants.ImagePath.PolygonImagePath;
                     break;
-                case NodeTypes.WellStrategies:
-                    imagePath = @"/Resources/WellStrategies.jpg";
+                case NodeTypes.WellStrategy:
+                    imagePath = Constants.ImagePath.WellStrategyImagePath;
                     break;
-                case NodeTypes.WellsChild:
-                    imagePath = @"/Resources/WellsM.jpg";
+                case NodeTypes.WellMembers:
+                    imagePath = Constants.ImagePath.WellMembersImagePath;
                     break;
-                case NodeTypes.RocksChild:
-                    imagePath = @"/Resources/RocksM.jpg";
+                case NodeTypes.RockMembers:
+                    imagePath = Constants.ImagePath.RockMembersImagePath;
                     break;
-                case NodeTypes.WellStrategiesChild:
-                    imagePath = @"/Resources/WellStrategiesM.jpg";
+                case NodeTypes.WellStrategyMembers:
+                    imagePath = Constants.ImagePath.WellStrategyMembersImagePath;
                     break;
                 default:
-                    imagePath = @"/Resources/new.jpg";
+                    imagePath = Constants.ImagePath.DefaultImagePath;
                     break;
             }
 
