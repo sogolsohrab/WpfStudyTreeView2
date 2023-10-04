@@ -24,11 +24,11 @@ namespace WpfStudyTreeView2
     public partial class MainWindow : Window
     {
 
-        public TreeViewModel MyViewModel { get; set; } 
-        public TreeModel Wells { get; set; }
-        public TreeModel Rocks { get; set; }
-        public TreeModel Polygones { get; set; }
-        public TreeModel WellStrategies { get; set; }
+        public TreeNodeViewModel MyViewModel { get; set; } 
+        public TreeNodeModel Wells { get; set; }
+        public TreeNodeModel Rocks { get; set; }
+        public TreeNodeModel Polygons { get; set; }
+        public TreeNodeModel WellStrategies { get; set; }
         
         public MainWindow()
         {
@@ -41,38 +41,38 @@ namespace WpfStudyTreeView2
         #region Private Methods
         private void LoadTree()
         {
-            MyViewModel = new TreeViewModel();
+            MyViewModel = new TreeNodeViewModel();
 
             // Wells
-            Wells = new TreeModel("Wells", Types.Wells);
+            Wells = new TreeNodeModel("Wells", NodeTypes.Wells);
             MyViewModel.Items.Add(Wells);
-            string[] wellsMember = { "R1_W7", "R1_W12345678912", "R1_W123456789111", "R2_W1", "R2_W11", "R2_W03", "R2_W123456789123456789", "R1_W1", "R1_W012" };
-            CreateMembers(Wells, wellsMember, Types.WellsChild);
+            string[] wellMembers = { "R1_W7", "R1_W12345678912", "R1_W123456789111", "R2_W1", "R2_W11", "R2_W03", "R2_W123456789123456789", "R1_W1", "R1_W012" };
+            CreateMembers(Wells, wellMembers, NodeTypes.WellsChild);
 
             // Rocks
-            Rocks = new TreeModel("Rocks", Types.Rocks);
+            Rocks = new TreeNodeModel("Rocks", NodeTypes.Rocks);
             MyViewModel.Items.Add(Rocks);
-            string[] rocksMember = { "R4", "R2", "R1", "R3", "R7", "R6", "R5"};
-            CreateMembers(Rocks, rocksMember, Types.RocksChild);
+            string[] rockMembers = { "R4", "R2", "R1", "R3", "R7", "R6", "R5"};
+            CreateMembers(Rocks, rockMembers, NodeTypes.RocksChild);
 
             // Polygones
-            Polygones = new TreeModel("Polygones", Types.Polygones);
-            MyViewModel.Items.Add(Polygones);
+            Polygons = new TreeNodeModel("Polygons", NodeTypes.Polygons);
+            MyViewModel.Items.Add(Polygons);
 
             // WellStrategies
-            WellStrategies = new TreeModel("WellStrategies", Types.WellStrategies);
+            WellStrategies = new TreeNodeModel("WellStrategies", NodeTypes.WellStrategies);
             MyViewModel.Items.Add(WellStrategies);
-            string[] wellStrategiesMember = { "WS6", "WS2", "WS4", "WS1", "WS3", "WS5" };
-            CreateMembers(WellStrategies, wellStrategiesMember, Types.WellStrategiesChild);
+            string[] wellStrategieMembers = { "WS6", "WS2", "WS4", "WS1", "WS3", "WS5" };
+            CreateMembers(WellStrategies, wellStrategieMembers, NodeTypes.WellStrategiesChild);
 
             SortTree();
         }
 
-        private void CreateMembers(TreeModel parant, string[] membersNameArray, Types membersType)
+        private void CreateMembers(TreeNodeModel parent, string[] membersNameArray, NodeTypes membersType)
         {
             foreach (string memberName in membersNameArray)
             {
-                parant.Items.Add(new TreeModel(memberName, membersType));
+                parent.Items.Add(new TreeNodeModel(memberName, membersType));
             }
         }
 
@@ -87,7 +87,7 @@ namespace WpfStudyTreeView2
         private void FillTree()
         { 
             MyTree.ItemTemplate = GetDataTemplate();
-            MyTree.ItemContainerStyle = GetStyle();
+            MyTree.ItemContainerStyle = CreateStyle();
             MyTree.ItemsSource = MyViewModel.Items;
             MyTree.SelectedItemChanged += OnSelectedItemChanged;
         }
@@ -99,7 +99,7 @@ namespace WpfStudyTreeView2
             dataTemplate.ItemsSource = new Binding() { Path = new PropertyPath("Items") };
 
             FrameworkElementFactory stackPanel = new FrameworkElementFactory(typeof(StackPanel));
-            stackPanel.Name = "parentStackpanel";
+            stackPanel.Name = "parentStackPanel";
             stackPanel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
 
             
@@ -113,7 +113,7 @@ namespace WpfStudyTreeView2
             FrameworkElementFactory textBlock = new FrameworkElementFactory(typeof(TextBlock));
             textBlock.SetValue(TextBlock.MarginProperty, new Thickness(5));
             textBlock.SetValue(TextBlock.FontSizeProperty, 12.0);
-            textBlock.SetBinding(TextBlock.TextProperty, new Binding() { Path = new PropertyPath("Title") });
+            textBlock.SetBinding(TextBlock.TextProperty, new Binding() { Path = new PropertyPath("Name") });
             stackPanel.AppendChild(textBlock);
 
             dataTemplate.VisualTree = stackPanel;
@@ -121,7 +121,7 @@ namespace WpfStudyTreeView2
             return dataTemplate;
         }
 
-        private Style GetStyle()
+        private Style CreateStyle()
         {
             var style = new Style {TargetType = typeof(TreeViewItem)};
             var eventSetter = new EventSetter(PreviewMouseRightButtonDownEvent, new MouseButtonEventHandler(OnPreviewMouseRightButtonDown));
@@ -133,19 +133,23 @@ namespace WpfStudyTreeView2
 
         private void OnPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (MyViewModel.SelectedItem == null)
+            {
+                return;
+            }
 
             ContextMenu contextMenu = new ContextMenu();
-            MenuItem RenameMenuItem = CreateMenuItem("Rename", @"/Resources/RenameIcon.jpg", renameMenuItem_Click);
-            MenuItem DeleteMenuItem = CreateMenuItem("Delete", @"/Resources/DeleteIcon.jpg", deleteMenuItem_Click);
+            MenuItem renameMenuItem = CreateMenuItem("Rename", @"/Resources/RenameIcon.jpg", RenameMenuItem_Click);
+            MenuItem deleteMenuItem = CreateMenuItem("Delete", @"/Resources/DeleteIcon.jpg", DeleteMenuItem_Click);
 
-            if (MyViewModel.SelectedItem.ParantType)
+            if (MyViewModel.SelectedItem.IsParentNode)
             {
-                contextMenu.Items.Add(RenameMenuItem);
+                contextMenu.Items.Add(renameMenuItem);
             }
             else 
             {
-                contextMenu.Items.Add(RenameMenuItem);
-                contextMenu.Items.Add(DeleteMenuItem);
+                contextMenu.Items.Add(renameMenuItem);
+                contextMenu.Items.Add(deleteMenuItem);
             }
             (sender as TreeViewItem).ContextMenu = contextMenu;
         }
@@ -162,30 +166,17 @@ namespace WpfStudyTreeView2
             return menuItem;
         }
 
-        private void ControlPanelsVisibilty(Border selectedBorder)
+        private void ControlPanelsVisibility(Border selectedBorder)
         {
-            Border visibleBorder;
+            
             List<Border> bordersList = new List<Border>() { HomePanel, RenamePanel, DeletePanel };
             foreach (var border in bordersList)
             {
                 border.Visibility = Visibility.Collapsed;
             }
 
+            selectedBorder.Visibility = Visibility.Visible;
 
-            if (selectedBorder == RenamePanel)
-            {
-                visibleBorder = RenamePanel;
-            }
-            else if (selectedBorder == DeletePanel)
-            {
-                visibleBorder = DeletePanel;
-            }
-            else
-            {
-                visibleBorder = HomePanel;
-            }
-
-            visibleBorder.Visibility = Visibility.Visible;
         }
         #endregion Private Methods
 
@@ -195,26 +186,26 @@ namespace WpfStudyTreeView2
         #region SelectedItemChanged
         private void OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            MyViewModel.SelectedItem = e.NewValue as TreeModel;
+            MyViewModel.SelectedItem = e.NewValue as TreeNodeModel;
         }
         #endregion SelectedItemChanged
 
 
         #region Delete Events
-        private void deleteMenuItem_Click(object sender, RoutedEventArgs e)
+        private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            ControlPanelsVisibilty(DeletePanel);
+            ControlPanelsVisibility(DeletePanel);
         }
 
-        private void btnAbortDelete_Click(object sender, RoutedEventArgs e)
+        private void BtnAbortDelete_Click(object sender, RoutedEventArgs e)
         {
-            ControlPanelsVisibilty(HomePanel);
+            ControlPanelsVisibility(HomePanel);
         }
 
-        private void btnProceedDelete_Click(object sender, RoutedEventArgs e)
+        private void BtnProceedDelete_Click(object sender, RoutedEventArgs e)
         {
 
-            if (MyViewModel.SelectedItem.ParantType)
+            if (MyViewModel.SelectedItem.IsParentNode)
             {
                 MyViewModel.Items.Remove(MyViewModel.SelectedItem);
             }
@@ -223,24 +214,24 @@ namespace WpfStudyTreeView2
                 Wells.Items.Remove(MyViewModel.SelectedItem);
                 Rocks.Items.Remove(MyViewModel.SelectedItem);
                 WellStrategies.Items.Remove(MyViewModel.SelectedItem);
-                Polygones.Items.Remove(MyViewModel.SelectedItem);
+                Polygons.Items.Remove(MyViewModel.SelectedItem);
             }
 
-            ControlPanelsVisibilty(HomePanel);
+            ControlPanelsVisibility(HomePanel);
 
         }
         #endregion Delete Events
 
 
         #region Rename Events
-        private void renameMenuItem_Click(object sender, RoutedEventArgs e)
+        private void RenameMenuItem_Click(object sender, RoutedEventArgs e)
         {
 
-            ControlPanelsVisibilty(RenamePanel);
+            ControlPanelsVisibility(RenamePanel);
 
-            if (MyViewModel.SelectedItem.Title != null)
+            if (MyViewModel.SelectedItem.Name != null)
             {
-                txtRename.Text = MyViewModel.SelectedItem.Title;
+                txtRename.Text = MyViewModel.SelectedItem.Name;
             }
             else
             {
@@ -249,25 +240,25 @@ namespace WpfStudyTreeView2
 
         }
 
-        private void btnAbortRename_Click(object sender, RoutedEventArgs e)
+        private void BtnAbortRename_Click(object sender, RoutedEventArgs e)
         {
             lblError.Content = string.Empty;
-            ControlPanelsVisibilty(HomePanel);
+            ControlPanelsVisibility(HomePanel);
         }
 
-        private void btnProceedRename_Click(object sender, RoutedEventArgs e)
+        private void BtnProceedRename_Click(object sender, RoutedEventArgs e)
         {
 
             if (
                 (txtRename.Text.Length > 1) &&
-                (!MyViewModel.Items.Any(x => x.Title == txtRename.Text)) &&
-                (!Wells.Items.Any(x => x.Title == txtRename.Text)) &&
-                (!Rocks.Items.Any(x => x.Title == txtRename.Text)) &&
-                (!WellStrategies.Items.Any(x => x.Title == txtRename.Text))
+                (!MyViewModel.Items.Any(x => x.Name == txtRename.Text)) &&
+                (!Wells.Items.Any(x => x.Name == txtRename.Text)) &&
+                (!Rocks.Items.Any(x => x.Name == txtRename.Text)) &&
+                (!WellStrategies.Items.Any(x => x.Name == txtRename.Text))
              )
             {
-                MyViewModel.SelectedItem.Title = txtRename.Text;
-                ControlPanelsVisibilty(HomePanel);
+                MyViewModel.SelectedItem.Name = txtRename.Text;
+                ControlPanelsVisibility(HomePanel);
 
                 SortTree();
                 lblError.Content = string.Empty;
@@ -275,12 +266,12 @@ namespace WpfStudyTreeView2
             else if (txtRename.Text.Length < 2)
             {
                 lblError.Content = "**Please choose a name with more than 2 characters!";
-                ControlPanelsVisibilty(RenamePanel);
+                ControlPanelsVisibility(RenamePanel);
             }
             else
             {
                 lblError.Content = "**duplicated name Please choose a new one!";
-                ControlPanelsVisibilty(RenamePanel);
+                ControlPanelsVisibility(RenamePanel);
             }
             
             txtRename.Clear();

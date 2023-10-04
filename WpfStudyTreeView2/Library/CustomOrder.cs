@@ -11,9 +11,9 @@ namespace WpfStudyTreeView2.Library
 {
     public static class CustomOrder
     {
-        public static void OrderModel(ObservableCollection<TreeModel> collection)
+        public static void OrderModel(ObservableCollection<TreeNodeModel> collection)
         {
-            List<TreeModel> listOfCollection = collection.OrderBy(x => x.Title, new NaturalStringComparer()).ToList();
+            List<TreeNodeModel> listOfCollection = collection.OrderBy(x => x.Name, new NaturalStringComparer()).ToList();
 
             for (int i = 0; i < listOfCollection.Count; i++)
             {

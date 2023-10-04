@@ -174,9 +174,9 @@
                                             </StackPanel>
                                         </DockPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Content="ABORT" Name="btnAbortDelete" Click="btnAbortDelete_Click"
+                                            <Button Content="ABORT" Name="btnAbortDelete" Click="BtnAbortDelete_Click"
                                             Width="80" Height="25" Margin="5,5,2,10" Background="White" BorderBrush="#0066BF" BorderThickness="1" Foreground="#0066BF"/>
-                                            <Button Content="PROCEED" Name="btnProceedDelete" Click="btnProceedDelete_Click" 
+                                            <Button Content="PROCEED" Name="btnProceedDelete" Click="BtnProceedDelete_Click" 
                                             Width="80" Height="25" Margin="2,5,10,10" Background="#0066BF" BorderBrush="#0066BF" BorderThickness="1" Foreground="White"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -217,9 +217,9 @@
                                         <TextBox Name="txtRename" Width="330" Height="25" HorizontalAlignment="Center" Margin="10,5,10,5" BorderBrush="Gray" BorderThickness="1"/>
                                         <Label Name="lblError" Foreground="Red" FontSize="10" FontWeight="Bold" Margin="10,2" HorizontalAlignment="Left"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Content="ABORT" Name="btnAbortRename" Click="btnAbortRename_Click"
+                                            <Button Content="ABORT" Name="btnAbortRename" Click="BtnAbortRename_Click"
                                             Width="80" Height="25" Margin="5,5,2,10" Background="White" BorderBrush="#0066BF" BorderThickness="1" Foreground="#0066BF"/>
-                                            <Button Content="PROCEED" Name="btnProceedRename" Click="btnProceedRename_Click"
+                                            <Button Content="PROCEED" Name="btnProceedRename" Click="BtnProceedRename_Click"
                                             Width="80" Height="25" Margin="2,5,10,10" Background="#0066BF" BorderBrush="#0066BF" BorderThickness="1" Foreground="White"/>
                                         </StackPanel>
                                     </StackPanel>
