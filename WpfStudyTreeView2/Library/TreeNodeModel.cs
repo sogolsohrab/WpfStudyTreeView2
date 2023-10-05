@@ -21,6 +21,7 @@ namespace WpfStudyTreeView2.Library
         WellStrategyMembers
     }
 
+    
     public class TreeNodeModel : PropertyChangedBase
     {
         private string name;
@@ -48,15 +49,7 @@ namespace WpfStudyTreeView2.Library
             NodeType = type;
             DisplayedImagePath = GetImage(type);
             Items = new ObservableCollection<TreeNodeModel>();
-
-            if (type == NodeTypes.Well || type == NodeTypes.Rock || type == NodeTypes.Polygon || type == NodeTypes.WellStrategy)
-            {
-                IsParentNode = true;
-            }
-            else
-            {
-                IsParentNode = false;
-            }
+            IsParentNode = (type.ToString().Contains("Member")) ? false : true;
         }
 
         private string GetImage(NodeTypes type)
